@@ -47,7 +47,6 @@ const SignUp = () => {
 
     const handleCheckbox = () => {
         setIsCheckboxChecked(!isCheckboxChecked);
-        console.log(isCheckboxChecked)
     }
     return (
         <>s

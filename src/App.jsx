@@ -1,13 +1,9 @@
-import React from 'react'
-import Web from './MyApp/Web'
+import { CartProvider } from './MyApp/MyContextAPI'
+
 
 
 const App = () => {
-    return (
-        <>
-            <Web />
-        </>
-    )
+    return (<CartProvider />)
 }
 
 export default App

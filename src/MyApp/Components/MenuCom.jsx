@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import MyMenuData from '../Api-folder/MenuApi'
+import ArrayForIcons from '../Api-folder/MenuIconsArray';
 
-
-const ArrayForIcons = [
-    {
-        name: 'breakfast',
-        iconFontAwesome: 'fa-solid fa-mug-saucer'
-    },
-    {
-        name: 'lunch',
-        iconFontAwesome: 'fa-solid fa-cookie-bite'
-    },
-    {
-        name: 'evening',
-        iconFontAwesome: 'fa-solid fa-burger'
-    },
-    {
-        name: 'dinner',
-        iconFontAwesome: 'fa-solid fa-utensils'
-    },
-]
+import { useCart } from '../MyContextAPI';
 
 
 const UniqueNavbarList = [...new Set(MyMenuData.map((currData) => {
@@ -31,6 +14,13 @@ const MenuCom = () => {
     const [newMenu, setNewMenu] = useState(MyMenuData);
     const [newId, setNewId] = useState(0);
 
+    const { placeInCart } = useCart();;
+
+    const AddItemtoCart = (foodItem) => {
+        placeInCart(foodItem);
+    };
+
+    //in array by default shows breakFast
     useEffect(() => {
         let tempUser = MyMenuData.filter((curElem) => {
             return (curElem.category === "breakfast");
@@ -98,39 +88,41 @@ const MenuCom = () => {
 
                     <div className="row mt-5 d-flex flex-wrap">
 
-                        {newMenu.map((currData) => {
-                            return (
-                                <div className="col-12 col-md-6 col-lg-3 mb-4" key={currData.id}>
-                                    <div className='menu-card p-4'>
+                        {
+                            newMenu.map((currData) => {
+                                return (
+                                    <div className="col-12 col-md-6 col-lg-3 mb-4" key={currData.id}>
+                                        <div className='menu-card p-4'>
 
-                                        <div className='menu-card-inner-div'>
-                                            <div className=' menu-img-div'>
-                                                <figure>
-                                                    <img src={currData.image} alt='item-pic' className=' img-fluid' />
-                                                </figure>
-                                            </div>
-
-                                            <div className='menu-card-datas mt-3'>
-
-                                                <div className='menu-card-heading w-100'>
-                                                    <h3 className='mb-0'>{currData.name}</h3>
+                                            <div className='menu-card-inner-div'>
+                                                <div className=' menu-img-div'>
+                                                    <figure>
+                                                        <img src={currData.image} alt='item-pic' className=' img-fluid' />
+                                                    </figure>
                                                 </div>
 
-                                                <div>
-                                                    <p className=' card-author subtle mb-2' style={{ color: "red" }}> {currData.category}</p>
-                                                    <div className="subtle w-100 d-flex justify-content-between">
-                                                        <span className="fs-3 fw-bolder" style={{ color: "#333333" }}>{currData.price}</span>
-                                                        <span className="card-tag ">Order Now</span>
+                                                <div className='menu-card-datas mt-3'>
+
+                                                    <div className='menu-card-heading w-100'>
+                                                        <h3 className='mb-0'>{currData.name}</h3>
                                                     </div>
+
+                                                    <div>
+                                                        <p className=' card-author subtle mb-2' style={{ color: "red" }}> {currData.category}</p>
+                                                        <div className="subtle w-100 d-flex justify-content-between">
+                                                            <span className="fs-3 fw-bolder" style={{ color: "#333333" }}>₹{currData.price}</span>
+                                                            <span className="card-tag " onClick={() => AddItemtoCart(currData)}>Add to Cart</span>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })
+                        }
 
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const PageScroolToTop = () => {
+const PageScrollToTop = () => {
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -12,4 +12,4 @@ const PageScroolToTop = () => {
 }
 
 
-export default PageScroolToTop
+export default PageScrollToTop

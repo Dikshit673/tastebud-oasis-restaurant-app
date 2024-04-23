@@ -538,6 +538,74 @@ section {
     border: 0.1rem solid currentColor;
 }
 
+/* ---------------------------------------------------cart starts-------------------------- */
+
+.cart-main-section .cart-top-div h5 {
+    font-family: var(--font-fam2);
+    text-transform: capitalize;
+    color: var(--main-col);
+}
+
+.cart-main-section .cart-top-div h2 {
+    color: var(--blck-col);
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: var(--font-fam1);
+}
+
+.cart-left-indiv,
+.cart-right-indiv {
+    box-shadow: 0rem 0rem 1rem 0.1rem var(--box-shd-col);
+    background-color: var(--wht-col);
+}
+
+.cart-display-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cart-left-indiv .cart-img-div img {
+    width: 100%;
+    height: 70px;
+}
+
+.cart-left-indiv .cart-data-div h4 {
+    font-size: 1.3rem;
+}
+
+.cart-quantity-minus,
+.cart-quantity-plus {
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--blck-col) !important;
+    margin: 0 0.1rem;
+    font-size: 0.75rem;
+}
+
+.cart-quantity-number {
+    height: 28px;
+    width: 40px;
+    border: 1px solid var(--blck-col) !important;
+    margin: 0 0.1rem;
+}
+
+.cart-delete-indiv {
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-color: red;
+    border: 1px solid red !important;
+    color: var(--wht-col);
+}
+
+.cart-delete-indiv:hover,
+.cart-delete-indiv:focus {
+    border: 1px solid var(--bg2-col) !important;
+}
+
 /* -------------------------------------------------booking comp starts----------------------- */
 
 .book-main-section .book-top-div h5 {

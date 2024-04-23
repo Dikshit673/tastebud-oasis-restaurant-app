@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import BackToTopCom from "./BackToTopCom";
 
@@ -6,29 +6,27 @@ const NavbarCom = () => {
     const [state, setState] = useState(false);          // navbar toggler
     const [boolColor, setBoolColor] = useState(false);  // navbar bg color
     const [dropdown, setDropdown] = useState(false);    // for dropdown
-    const [name, setName] = useState(false);            // for dropdown active class
 
     let location = useLocation();
 
+    const validPaths = ['/service', '/booking', '/testimonial', '/contact'];
+    const isDropDownActive = validPaths.includes(location.pathname);
+
     useEffect(() => {
+        const handleChangeBackground = () => {
+            if (window.scrollY >= 78) {
+                setBoolColor(true)
+            }
+            else {
+                setBoolColor(false)
+            }
+        }
 
-        if (location.pathname === "/service" || location.pathname === "/booking" || location.pathname === "/testimonial") {
-            setName(true)
-        }
-        else {
-            setName(false)
-        }
+        window.addEventListener("scroll", handleChangeBackground);
 
-    }, [location])
+        return () => { window.removeEventListener('scroll', handleChangeBackground) };
 
-    const handleChangeBackground = () => {
-        if (window.scrollY >= 78) {
-            setBoolColor(true)
-        }
-        else {
-            setBoolColor(false)
-        }
-    }
+    }, []);
 
     const handleNavLinks = () => {
         // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -46,8 +44,6 @@ const NavbarCom = () => {
             setDropdown(true);
         }
     }
-
-    window.addEventListener("scroll", handleChangeBackground);
 
     return (
         <>
@@ -78,20 +74,27 @@ const NavbarCom = () => {
 
 
                                 <li className="nav-item dropdown nav-drop-page">
-                                    <NavLink to="/pages" className={`nav-link dropdown-toggle ${name ? "active" : ""}`} role="button" data-bs-toggle="dropdown" onClick={() => handleNavDropdown()} >
+                                    <NavLink to="/pages" className={`nav-link dropdown-toggle ${isDropDownActive ? "active" : ""}`} role="button" data-bs-toggle="dropdown" onClick={() => handleNavDropdown()} >
                                         Pages
                                     </NavLink>
                                     <ul className={`dropdown-menu ${dropdown ? "show" : ""}`} data-bs-popper="static" >
                                         <li><NavLink className="dropdown-item" to="/service" onClick={() => handleNavLinkColor()} >Service</NavLink></li>
                                         <li><NavLink className="dropdown-item" to="/booking" onClick={() => handleNavLinkColor()} >Booking</NavLink></li>
                                         <li><NavLink className="dropdown-item" to="/testimonial" onClick={() => handleNavLinkColor()} >Testimonial</NavLink></li>
+                                        <li><NavLink className="dropdown-item" to="/contact" onClick={() => handleNavLinkColor()} >Contact</NavLink></li>
                                     </ul>
                                 </li>
 
 
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <NavLink className="nav-link" to="/contact" onClick={() => handleNavLinks()}>
                                         Contact
+                                    </NavLink>
+                                </li> */}
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/cart" onClick={() => handleNavLinks()}>
+                                        <i className="fa-solid fa-cart-shopping"></i>
+                                        <small>cart</small>
                                     </NavLink>
                                 </li>
                             </ul>
