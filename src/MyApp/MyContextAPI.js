@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import Web from './Web';
 
 const CartContext = createContext();
 
@@ -7,7 +6,7 @@ const useCart = () => {
     return useContext(CartContext);
 }
 
-const CartProvider = () => {
+const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     const [cartPricing, setCartPricing] = useState({});
 
@@ -78,7 +77,7 @@ const CartProvider = () => {
 
     return (
         <CartContext.Provider value={{ cartItems, cartPricing, placeInCart, removeFromCart, increaseQuantity, decreaseQuantity }}>
-            <Web />
+            {children}
         </CartContext.Provider>
     );
 }
